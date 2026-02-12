@@ -11,7 +11,7 @@ def health() -> str:
       200:
         description: Service is healthy
         examples:
-          text/plain: OK
+          text/plain: RECIPE OK
     """
-    return "OK"
+    return "RECIPE OK"
 
