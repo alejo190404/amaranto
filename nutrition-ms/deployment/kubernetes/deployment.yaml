@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nutrition-ms
+  labels:
+    app: nutrition-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nutrition-ms
+  template:
+    metadata:
+      labels:
+        app: nutrition-ms
+    spec:
+      containers:
+        - name: nutrition-ms
+          image: nutrition-ms:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
